@@ -32,6 +32,7 @@ import { classMap } from "lit-html/directives/class-map";
 // tslint:disable-next-line: no-duplicate-imports
 import { PaperIconItemElement } from "@polymer/paper-item/paper-icon-item";
 import { computeRTL } from "../common/util/compute_rtl";
+import { mdiCellphoneSettingsVariant, mdiBell } from "@mdi/js";
 
 const SHOW_AFTER_SPACER = ["config", "developer-tools", "hassio"];
 
@@ -194,7 +195,7 @@ class HaSidebar extends LitElement {
                 >
                   <ha-icon
                     slot="item-icon"
-                    icon="hass:cellphone-settings-variant"
+                    .path=${mdiCellphoneSettingsVariant}
                   ></ha-icon>
                   <span class="item-text">
                     ${hass.localize("ui.sidebar.external_app_configuration")}
@@ -214,7 +215,7 @@ class HaSidebar extends LitElement {
         @mouseenter=${this._itemMouseEnter}
         @mouseleave=${this._itemMouseLeave}
       >
-        <ha-icon slot="item-icon" icon="hass:bell"></ha-icon>
+        <ha-icon slot="item-icon" .path=${mdiBell}></ha-icon>
         ${!this.expanded && notificationCount > 0
           ? html`
               <span class="notification-badge" slot="item-icon">

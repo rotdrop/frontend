@@ -26,6 +26,13 @@ function copyTranslations(staticDir) {
   );
 }
 
+function copyMdiIcons(staticDir) {
+  const staticPath = genStaticPath(staticDir);
+
+  // MDI icons output
+  fs.copySync(polyPath("build/mdi"), staticPath("mdi"));
+}
+
 function copyPolyfills(staticDir) {
   const staticPath = genStaticPath(staticDir);
 
@@ -74,6 +81,7 @@ gulp.task("copy-static", (done) => {
   copyPolyfills(staticDir);
   copyFonts(staticDir);
   copyTranslations(staticDir);
+  copyMdiIcons(staticDir);
 
   // Panel assets
   copyFileDir(
@@ -97,6 +105,7 @@ gulp.task("copy-static-demo", (done) => {
   copyMapPanel(paths.demo_static);
   copyFonts(paths.demo_static);
   copyTranslations(paths.demo_static);
+  copyMdiIcons(paths.demo_static);
   done();
 });
 
@@ -109,6 +118,7 @@ gulp.task("copy-static-cast", (done) => {
   copyMapPanel(paths.cast_static);
   copyFonts(paths.cast_static);
   copyTranslations(paths.cast_static);
+  copyMdiIcons(paths.cast_static);
   done();
 });
 
@@ -121,5 +131,6 @@ gulp.task("copy-static-gallery", (done) => {
   copyMapPanel(paths.gallery_static);
   copyFonts(paths.gallery_static);
   copyTranslations(paths.gallery_static);
+  copyMdiIcons(paths.gallery_static);
   done();
 });
