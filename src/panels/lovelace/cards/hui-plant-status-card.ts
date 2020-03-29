@@ -264,6 +264,7 @@ class HuiPlantStatusCard extends LitElement implements LovelaceCard {
     if (target.value) {
       fireEvent(this, "hass-more-info", {
         entityId: stateObj.attributes.sensors[target.value],
+        hoursToShow: this._config!.hours_to_show,
       });
     }
   }

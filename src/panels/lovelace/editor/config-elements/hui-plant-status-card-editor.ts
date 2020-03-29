@@ -23,6 +23,7 @@ const cardConfigStruct = object({
   entity: string(),
   name: optional(string()),
   theme: optional(string()),
+  hours_to_show: optional(number()),
 });
 
 const includeDomains = ["plant"];
@@ -49,6 +50,10 @@ export class HuiPlantStatusCardEditor extends LitElement
 
   get _theme(): string {
     return this._config!.theme || "";
+  }
+
+  get _hours_to_show(): number {
+    return this._config!.hours_to_show || 24;
   }
 
   protected render(): TemplateResult {
@@ -80,6 +85,17 @@ export class HuiPlantStatusCardEditor extends LitElement
           )})"
           .value="${this._name}"
           .configValue="${"name"}"
+          @value-changed="${this._valueChanged}"
+        ></paper-input>
+        <paper-input
+          .label="${this.hass.localize(
+            "ui.panel.lovelace.editor.card.generic.hours_to_show"
+          )} (${this.hass.localize(
+            "ui.panel.lovelace.editor.card.config.optional"
+          )})"
+          type="number"
+          .value="${this._hours_to_show}"
+          .configValue="${"hours_to_show"}"
           @value-changed="${this._valueChanged}"
         ></paper-input>
         <hui-theme-select-editor
