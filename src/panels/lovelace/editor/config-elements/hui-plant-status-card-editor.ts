@@ -15,6 +15,7 @@ const cardConfigStruct = assign(
     entity: optional(string()),
     name: optional(string()),
     theme: optional(string()),
+    hours_to_show: optional(number()),
   })
 );
 
@@ -22,6 +23,7 @@ const SCHEMA = [
   { name: "entity", required: true, selector: { entity: { domain: "plant" } } },
   { name: "name", selector: { text: {} } },
   { name: "theme", selector: { theme: {} } },
+  { name: "hours_to_show", selector: { hours_to_show: {} } },
 ] as const;
 
 @customElement("hui-plant-status-card-editor")
@@ -36,6 +38,7 @@ export class HuiPlantStatusCardEditor
   public setConfig(config: PlantStatusCardConfig): void {
     assert(config, cardConfigStruct);
     this._config = config;
+    this._config.hours_to_show = this._config!.hours_to_show || 24;
   }
 
   protected render() {
