@@ -36,6 +36,8 @@ export class MoreInfoHistory extends LitElement {
 
   @property({ attribute: false }) public entityId!: string;
 
+  @property({ attribute: false }) public hoursToShow?: number;
+
   @state() private _stateHistory?: HistoryResult;
 
   @state() private _statistics?: Statistics;
@@ -210,7 +212,7 @@ export class MoreInfoHistory extends LitElement {
     const _metadata = this._getStatisticsMetaData([this.entityId]);
     const _statistics = fetchStatistics(
       this.hass!,
-      subHours(new Date(), 24),
+      subHours(new Date(), this.hoursToShow ?? 24),
       undefined,
       [this.entityId],
       "5minute",
@@ -267,7 +269,7 @@ export class MoreInfoHistory extends LitElement {
           this.hass!.localize
         );
       },
-      24,
+      this.hoursToShow ?? 24,
       [this.entityId]
     ).catch((err) => {
       this._subscribed = undefined;
