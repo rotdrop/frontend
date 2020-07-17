@@ -82,6 +82,7 @@ import "./more-info-content";
 
 export interface MoreInfoDialogParams {
   entityId: string | null;
+  hoursToShow: number | null;
   view?: View;
   /** @deprecated Use `view` instead */
   tab?: View;
@@ -137,6 +138,8 @@ export class MoreInfoDialog extends ScrollableFadeMixin(LitElement) {
 
   @state() private _sensorNumericDeviceClasses?: string[] = [];
 
+  @state() private _hoursToShow?: number | null;
+
   protected scrollFadeThreshold = 24;
 
   protected get scrollableElement(): HTMLElement | null {
@@ -154,6 +157,10 @@ export class MoreInfoDialog extends ScrollableFadeMixin(LitElement) {
     this._currView = params.view || DEFAULT_VIEW;
     this._initialView = params.view || DEFAULT_VIEW;
     this._childView = undefined;
+    this._hoursToShow = params.hoursToShow;
+    if (!this._hoursToShow) {
+      this._hoursToShow = 24;
+    }
     this.large = false;
     this._loadEntityRegistryEntry();
   }
@@ -183,6 +190,7 @@ export class MoreInfoDialog extends ScrollableFadeMixin(LitElement) {
     this._isEscapeEnabled = true;
     window.removeEventListener("dialog-closed", this._enableEscapeKeyClose);
     window.removeEventListener("show-dialog", this._disableEscapeKeyClose);
+    this._hoursToShow = undefined;
     fireEvent(this, "dialog-closed", { dialog: this.localName });
   }
 
@@ -705,6 +713,7 @@ export class MoreInfoDialog extends ScrollableFadeMixin(LitElement) {
                             .entry=${this._entry}
                             .editMode=${this._infoEditMode}
                             .data=${this._data}
+                            .hoursToShow=${this._hoursToShow}
                           ></ha-more-info-info>
                         `
                       : this._currView === "history"
