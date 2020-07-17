@@ -254,6 +254,7 @@ export const entitiesConfigStruct = union([
     tap_action: optional(actionConfigStruct),
     hold_action: optional(actionConfigStruct),
     double_tap_action: optional(actionConfigStruct),
+    hours_to_show: optional(number()),
   }),
   string(),
   buttonEntitiesRowConfigStruct,

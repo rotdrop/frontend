@@ -20,6 +20,8 @@ export class MoreInfoHistory extends LitElement {
 
   @property() public entityId!: string;
 
+  @property() public hoursToShow?: 24;
+
   @internalProperty() private _stateHistory?: HistoryResult;
 
   private _throttleGetStateHistory = throttle(() => {
@@ -79,7 +81,7 @@ export class MoreInfoHistory extends LitElement {
       this.entityId,
       {
         cacheKey: `more_info.${this.entityId}`,
-        hoursToShow: 24,
+        hoursToShow: `${this.hoursToShow}`,
       },
       this.hass!.localize,
       this.hass!.language
