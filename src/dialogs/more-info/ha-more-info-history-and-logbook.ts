@@ -17,6 +17,8 @@ export class MoreInfoHistoryAndLogbook extends LitElement {
 
   @state() private _sensorNumericDeviceClasses?: string[] = [];
 
+  @property() public hoursToShow?: number;
+
   private async _loadNumericDeviceClasses() {
     const deviceClasses = await getSensorNumericDeviceClasses(this.hass);
     this._sensorNumericDeviceClasses = deviceClasses.numeric_device_classes;
@@ -34,6 +36,7 @@ export class MoreInfoHistoryAndLogbook extends LitElement {
             <ha-more-info-history
               .hass=${this.hass}
               .entityId=${this.entityId}
+              .hoursToShow=${this.hoursToShow}
             ></ha-more-info-history>
           `
         : ""}

@@ -36,6 +36,8 @@ export class MoreInfoHistory extends LitElement {
 
   @property({ attribute: false }) public entityId!: string;
 
+  @property() public hoursToShow?: number;
+
   @state() private _stateHistory?: HistoryResult;
 
   @state() private _statistics?: Statistics;
@@ -55,6 +57,9 @@ export class MoreInfoHistory extends LitElement {
   protected render() {
     if (!this.entityId) {
       return nothing;
+    }
+    if (!this.hoursToShow) {
+      this.hoursToShow = 24;
     }
 
     return html`${isComponentLoaded(this.hass, "history")
@@ -185,7 +190,7 @@ export class MoreInfoHistory extends LitElement {
     const _metadata = this._getStatisticsMetaData([this.entityId]);
     const _statistics = fetchStatistics(
       this.hass!,
-      subHours(new Date(), 24),
+      subHours(new Date(), this.hoursToShow),
       undefined,
       [this.entityId],
       "5minute",
@@ -246,7 +251,7 @@ export class MoreInfoHistory extends LitElement {
           sensorNumericDeviceClasses
         );
       },
-      24,
+      this.hoursToShow,
       [this.entityId]
     ).catch((err) => {
       this._subscribed = undefined;

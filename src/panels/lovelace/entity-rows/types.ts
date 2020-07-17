@@ -14,6 +14,7 @@ export interface EntityConfig {
   name?: string | EntityNameItem | EntityNameItem[];
   icon?: string;
   image?: string;
+  hours_to_show?: number;
 }
 
 export interface ConfirmableRowConfig extends EntityConfig {
