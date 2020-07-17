@@ -1,6 +1,6 @@
 import { html, LitElement, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators";
-import { assert, assign, object, optional, string } from "superstruct";
+import { assert, assign, object, optional, string, number } from "superstruct";
 import { fireEvent } from "../../../../common/dom/fire_event";
 import "../../../../components/ha-form/ha-form";
 import type { SchemaUnion } from "../../../../components/ha-form/types";
@@ -16,6 +16,7 @@ const cardConfigStruct = assign(
     entity: optional(string()),
     name: optional(entityNameStruct),
     theme: optional(string()),
+    hours_to_show: optional(number()),
   })
 );
 
@@ -29,6 +30,7 @@ const SCHEMA = [
     context: { entity: "entity" },
   },
   { name: "theme", selector: { theme: {} } },
+  { name: "hours_to_show", selector: { hours_to_show: {} } },
 ] as const;
 
 @customElement("hui-plant-status-card-editor")
@@ -43,6 +45,7 @@ export class HuiPlantStatusCardEditor
   public setConfig(config: PlantStatusCardConfig): void {
     assert(config, cardConfigStruct);
     this._config = config;
+    this._config.hours_to_show = this._config!.hours_to_show || 24;
   }
 
   protected render() {

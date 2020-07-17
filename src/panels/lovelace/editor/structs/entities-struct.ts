@@ -1,4 +1,4 @@
-import { array, union, object, string, optional, boolean } from "superstruct";
+import { array, union, object, string, optional, boolean, number } from "superstruct";
 import { timeFormatConfigStruct } from "../../components/types";
 import {
   actionConfigStruct,
@@ -21,6 +21,7 @@ export const entitiesConfigStruct = union([
     confirmation: optional(actionConfigStructConfirmation),
     show_last_changed: optional(boolean()),
     show_state: optional(boolean()),
+    hours_to_show: optional(number()),
   }),
   string(),
 ]);
