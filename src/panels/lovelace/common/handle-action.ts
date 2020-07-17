@@ -17,6 +17,7 @@ declare global {
 
 export type ActionConfigParams = {
   entity?: string;
+  hours_to_show?: number;
   camera_image?: string;
   image_entity?: string;
   hold_action?: ActionConfig;
@@ -99,6 +100,7 @@ export const handleAction = async (
           entityId: (config.entity ||
             config.camera_image ||
             config.image_entity)!,
+          hoursToShow: config.hours_to_show ? config.hours_to_show : 24,
         });
       } else {
         showToast(node, {
