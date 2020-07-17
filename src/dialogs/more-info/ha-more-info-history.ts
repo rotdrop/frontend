@@ -39,6 +39,8 @@ export class MoreInfoHistory extends LitElement {
 
   @property() public entityId!: string;
 
+  @property() public hoursToShow?: 24;
+
   @state() private _stateHistory?: HistoryResult;
 
   @state() private _statistics?: Statistics;
@@ -236,7 +238,7 @@ export class MoreInfoHistory extends LitElement {
           sensorNumericDeviceClasses
         );
       },
-      24,
+      this.hoursToShow,
       [this.entityId]
     ).catch((err) => {
       this._subscribed = undefined;

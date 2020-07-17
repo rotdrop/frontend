@@ -54,6 +54,7 @@ import "./more-info-content";
 
 export interface MoreInfoDialogParams {
   entityId: string | null;
+  hoursToShow: number | null;
   view?: View;
   /** @deprecated Use `view` instead */
   tab?: View;
@@ -97,6 +98,8 @@ export class MoreInfoDialog extends LitElement {
 
   @state() private _infoEditMode = false;
 
+  @state() private _hoursToShow?: number | null;
+
   @query("ha-more-info-info, ha-more-info-history-and-logbook")
   private _history?: MoreInfoInfo | MoreInfoHistoryAndLogbook;
 
@@ -109,6 +112,10 @@ export class MoreInfoDialog extends LitElement {
     this._currView = params.view || DEFAULT_VIEW;
     this._initialView = params.view || DEFAULT_VIEW;
     this._childView = undefined;
+    this._hoursToShow = params.hoursToShow;
+    if (!this._hoursToShow) {
+      this._hoursToShow = 24;
+    }
     this.large = false;
     this._loadEntityRegistryEntry();
   }
@@ -133,6 +140,7 @@ export class MoreInfoDialog extends LitElement {
     this._childView = undefined;
     this._infoEditMode = false;
     this._initialView = DEFAULT_VIEW;
+    this._hoursToShow = undefined;
     fireEvent(this, "dialog-closed", { dialog: this.localName });
   }
 
@@ -484,6 +492,7 @@ export class MoreInfoDialog extends LitElement {
                       <ha-more-info-history-and-logbook
                         .hass=${this.hass}
                         .entityId=${this._entityId}
+                        .hoursToShow=${this._hoursToShow}
                       ></ha-more-info-history-and-logbook>
                     `
                   : this._currView === "settings"
