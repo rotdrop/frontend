@@ -8,6 +8,7 @@ export interface EntityConfig {
   name?: string;
   icon?: string;
   image?: string;
+  hours_to_show?: number;
 }
 export interface ActionRowConfig extends EntityConfig {
   action_name?: string;

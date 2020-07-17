@@ -85,6 +85,7 @@ export const entitiesConfigStruct = union([
     secondary_info: optional(string()),
     format: optional(string()),
     state_color: optional(boolean()),
+    hours_to_show: optional(number()),
   }),
   EntityId,
 ]);
