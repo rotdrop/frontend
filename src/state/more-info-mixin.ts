@@ -56,6 +56,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
               : false),
           data: ev.detail.data,
           returnUrl,
+          hoursToShow: ev.detail.hoursToShow ?? 24,
         },
         () => import("../dialogs/more-info/ha-more-info-dialog"),
         ev.detail.parentElement

@@ -102,6 +102,7 @@ import "./more-info-content";
 export interface MoreInfoDialogParams {
   entityId: string | null;
   view?: MoreInfoView;
+  hoursToShow: number | null;
   /** @deprecated Use `view` instead */
   tab?: MoreInfoView;
   large?: boolean;
@@ -173,6 +174,8 @@ export class MoreInfoDialog extends DirtyStateProviderMixin<
 
   @state() private _isEscapeEnabled = true;
 
+  @state() private _hoursToShow?: number | null = 24;
+
   protected scrollFadeThreshold = 24;
 
   protected get scrollableElement(): HTMLElement | null {
@@ -196,6 +199,7 @@ export class MoreInfoDialog extends DirtyStateProviderMixin<
     this._infoEditMode = false;
     this._detailsYamlMode = false;
 
+    this._hoursToShow = params.hoursToShow ?? 24;
     this.large = params.large ?? false;
     this._fill = false;
     this._open = true;
@@ -246,6 +250,7 @@ export class MoreInfoDialog extends DirtyStateProviderMixin<
     this._isEscapeEnabled = true;
     window.removeEventListener("dialog-closed", this._enableEscapeKeyClose);
     window.removeEventListener("show-dialog", this._disableEscapeKeyClose);
+    this._hoursToShow = undefined;
     fireEvent(this, "dialog-closed", { dialog: this.localName });
   }
 
@@ -935,6 +940,7 @@ export class MoreInfoDialog extends DirtyStateProviderMixin<
                                   .entry=${this._entry}
                                   .editMode=${this._infoEditMode}
                                   .data=${this._data}
+                                  .hoursToShow=${this._hoursToShow}
                                 ></ha-more-info-info>
                               `
                             : this._currView === "history"
