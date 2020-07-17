@@ -19,6 +19,7 @@ export const handleAction = async (
   hass: HomeAssistant,
   config: {
     entity?: string;
+    hours_to_show?: number;
     camera_image?: string;
     hold_action?: ActionConfig;
     tap_action?: ActionConfig;
@@ -88,6 +89,7 @@ export const handleAction = async (
       if (config.entity || config.camera_image) {
         fireEvent(node, "hass-more-info", {
           entityId: config.entity ? config.entity : config.camera_image!,
+          hoursToShow: config.hours_to_show ? config.hours_to_show : 24,
         });
       } else {
         showToast(node, {

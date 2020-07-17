@@ -44,6 +44,7 @@ const EDITABLE_DOMAINS = ["script"];
 
 export interface MoreInfoDialogParams {
   entityId: string | null;
+  hoursToShow: number | null;
 }
 
 @customElement("ha-more-info-dialog")
@@ -56,11 +57,17 @@ export class MoreInfoDialog extends LitElement {
 
   @state() private _currTabIndex = 0;
 
+  @state() private _hoursToShow?: number | null;
+
   public showDialog(params: MoreInfoDialogParams) {
     this._entityId = params.entityId;
     if (!this._entityId) {
       this.closeDialog();
       return;
+    }
+    this._hoursToShow = params.hoursToShow;
+    if (!this._hoursToShow) {
+      this._hoursToShow = 24;
     }
     this.large = false;
   }
@@ -68,6 +75,7 @@ export class MoreInfoDialog extends LitElement {
   public closeDialog() {
     this._entityId = undefined;
     this._currTabIndex = 0;
+    this._hoursToShow = undefined;
     fireEvent(this, "dialog-closed", { dialog: this.localName });
   }
 
@@ -190,6 +198,7 @@ export class MoreInfoDialog extends LitElement {
                     : html`<ha-more-info-history
                         .hass=${this.hass}
                         .entityId=${this._entityId}
+                        .hoursToShow=${this._hoursToShow}
                       ></ha-more-info-history>`}
                   ${DOMAINS_WITH_MORE_INFO.includes(domain) ||
                   !this._computeShowLogBookComponent(entityId)
@@ -229,6 +238,7 @@ export class MoreInfoDialog extends LitElement {
                   <ha-more-info-history
                     .hass=${this.hass}
                     .entityId=${this._entityId}
+                    .hoursToShow=${this._hoursToShow}
                   ></ha-more-info-history>
                   <ha-more-info-logbook
                     .hass=${this.hass}

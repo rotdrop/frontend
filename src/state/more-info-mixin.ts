@@ -29,6 +29,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
         "ha-more-info-dialog",
         {
           entityId: ev.detail.entityId,
+          hoursToShow: ev.detail.hoursToShow,
         },
         () => import("../dialogs/more-info/ha-more-info-dialog")
       );
