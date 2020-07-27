@@ -16,7 +16,7 @@ import "../../components/hui-theme-select-editor";
 import { LovelaceCardEditor } from "../../types";
 import { EditorTarget, EntitiesEditorEvent } from "../types";
 import { configElementStyle } from "./config-elements-style";
-import { assert, object, string, optional } from "superstruct";
+import { assert, object, string, number, optional } from "superstruct";
 
 const cardConfigStruct = object({
   type: string(),
@@ -88,14 +88,14 @@ export class HuiPlantStatusCardEditor extends LitElement
           @value-changed="${this._valueChanged}"
         ></paper-input>
         <paper-input
+          type="number"
           .label="${this.hass.localize(
             "ui.panel.lovelace.editor.card.generic.hours_to_show"
           )} (${this.hass.localize(
             "ui.panel.lovelace.editor.card.config.optional"
           )})"
-          type="number"
           .value="${this._hours_to_show}"
-          .configValue="${"hours_to_show"}"
+          .configValue=${"hours_to_show"}
           @value-changed="${this._valueChanged}"
         ></paper-input>
         <hui-theme-select-editor
@@ -117,14 +117,18 @@ export class HuiPlantStatusCardEditor extends LitElement
       return;
     }
     if (target.configValue) {
-      if (target.value === "") {
+      if (
+        target.value === "" ||
+        (target.type === "number" && isNaN(Number(target.value)))
+      ) {
         this._config = { ...this._config };
         delete this._config[target.configValue!];
       } else {
-        this._config = {
-          ...this._config,
-          [target.configValue!]: target.value,
-        };
+        let value: any = target.value;
+        if (target.type === "number") {
+          value = Number(value);
+        }
+        this._config = { ...this._config, [target.configValue!]: value };
       }
     }
     fireEvent(this, "config-changed", { config: this._config });

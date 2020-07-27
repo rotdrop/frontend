@@ -5,7 +5,7 @@ import {
   ShowViewConfig,
 } from "../../../data/lovelace";
 import { EntityConfig } from "../entity-rows/types";
-import { optional, string, object, union, boolean } from "superstruct";
+import { optional, string, object, union, boolean, number } from "superstruct";
 import { EntityId } from "../common/structs/is-entity-id";
 import { Icon } from "../common/structs/is-icon";
 
