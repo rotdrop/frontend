@@ -261,6 +261,10 @@ class MoreInfoLight extends LitElement {
         padding-top: 16px;
       }
 
+      .content > ha-attributes {
+        max-height: none;
+      }
+
       .color_temp {
         --ha-slider-background: -webkit-linear-gradient(
           right,
