@@ -84,7 +84,7 @@ export class MoreInfoHistory extends LitElement {
       {
         refresh: 60,
         cacheKey: `more_info.${this.entityId}`,
-        hoursToShow: ${this.hoursToShow},
+        hoursToShow: `${this.hoursToShow}`,
       },
       this.hass!.localize,
       this.hass!.language
