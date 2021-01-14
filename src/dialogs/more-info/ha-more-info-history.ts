@@ -19,7 +19,7 @@ export class MoreInfoHistory extends LitElement {
 
   private _throttleGetStateHistory = throttle(() => {
     this._getStateHistory();
-  }, 10000);
+  }, 600000);
 
   protected render(): TemplateResult {
     if (!this.entityId) {
@@ -61,7 +61,7 @@ export class MoreInfoHistory extends LitElement {
       this.hass.states[this.entityId] !== oldHass?.states[this.entityId]
     ) {
       // wait for commit of data (we only account for the default setting of 1 sec)
-      setTimeout(this._throttleGetStateHistory, 1000);
+      setTimeout(this._throttleGetStateHistory, 60000);
     }
   }
 
