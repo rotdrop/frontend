@@ -422,7 +422,7 @@ export class HaChartBase extends LitElement {
     }
     this._tooltip = {
       ...context.tooltip,
-      top: this.chart!.canvas.offsetTop + context.tooltip.caretY + 12 + "px",
+      top: this.chart!.canvas.offsetTop + context.tooltip.caretY + 32 + "px",
       left:
         this.chart!.canvas.offsetLeft +
         clamp(
