@@ -485,6 +485,7 @@ export class MoreInfoDialog extends LitElement {
                       .entityId=${this._entityId}
                       .entry=${this._entry}
                       .editMode=${this._infoEditMode}
+                      .hoursToShow=${this._hoursToShow}
                     ></ha-more-info-info>
                   `
                 : this._currView === "history"

@@ -16,7 +16,7 @@ export class MoreInfoHistoryAndLogbook extends LitElement {
 
   @property() public entityId!: string;
 
-  @property() public hoursToShow?: 24;
+  @property() public hoursToShow?: number;
     
   @query("ha-more-info-history")
   private _history?: MoreInfoHistory;
@@ -31,8 +31,8 @@ export class MoreInfoHistoryAndLogbook extends LitElement {
         ? html`
             <ha-more-info-history
               .hass=${this.hass}
-	      .entityId=${this.entityId}
-	      .hoursToShow=${this.hoursToShow}    
+              .entityId=${this.entityId}
+              .hoursToShow=${this.hoursToShow}
             ></ha-more-info-history>
           `
         : ""}
