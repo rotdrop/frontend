@@ -129,7 +129,7 @@ export const getDefaultFormatOptions = (
   options?: Intl.NumberFormatOptions
 ): Intl.NumberFormatOptions => {
   const defaultOptions: Intl.NumberFormatOptions = {
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 3,
     ...options,
   };
 
