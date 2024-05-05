@@ -10,6 +10,7 @@ export NVM_DIR="$HOME/.nvm"
 
 . venv/bin/activate
 pip install --upgrade pip
+pip install build
 nvm use
 yarn install
 node_modules/.bin/gulp setup-and-fetch-nightly-translations
