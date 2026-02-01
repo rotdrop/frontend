@@ -36,7 +36,7 @@ export class MoreInfoHistoryAndLogbook extends LitElement {
             <ha-more-info-history
               .hass=${this.hass}
               .entityId=${this.entityId}
-              .hoursToShow=${this.hoursToShow}
+              .hoursToShow=${this.hoursToShow ?? 24}
             ></ha-more-info-history>
           `
         : ""}

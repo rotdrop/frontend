@@ -91,7 +91,7 @@ export class MoreInfoInfo extends LitElement {
             : html`<ha-more-info-history
                 .hass=${this.hass}
                 .entityId=${this.entityId}
-                .hoursToShow=${this.hoursToShow}
+                .hoursToShow=${this.hoursToShow ?? 24}
               ></ha-more-info-history>`}
           ${DOMAINS_WITH_MORE_INFO.includes(domain) ||
           !computeShowLogBookComponent(

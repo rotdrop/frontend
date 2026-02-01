@@ -158,9 +158,6 @@ export class MoreInfoDialog extends ScrollableFadeMixin(LitElement) {
     this._initialView = params.view || DEFAULT_VIEW;
     this._childView = undefined;
     this._hoursToShow = params.hoursToShow;
-    if (!this._hoursToShow) {
-      this._hoursToShow = 24;
-    }
     this.large = false;
     this._loadEntityRegistryEntry();
   }
@@ -713,7 +710,7 @@ export class MoreInfoDialog extends ScrollableFadeMixin(LitElement) {
                             .entry=${this._entry}
                             .editMode=${this._infoEditMode}
                             .data=${this._data}
-                            .hoursToShow=${this._hoursToShow}
+                            .hoursToShow=${this._hoursToShow ?? 24}
                           ></ha-more-info-info>
                         `
                       : this._currView === "history"
