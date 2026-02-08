@@ -277,6 +277,10 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
   }
 
   private _updateColumns() {
+    if (!this.hass) {
+      console.error('HASS IS NOT SET', { self: this });
+      return;
+    }
     const matchColumns = this.mqls.reduce(
       (cols, mql) => cols + Number(mql.matches),
       0
