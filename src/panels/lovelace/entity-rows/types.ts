@@ -15,6 +15,7 @@ export interface EntityConfig {
   icon?: string;
   image?: string;
   time_format?: TimestampRenderingFormat;
+  hours_to_show?: number;
 }
 
 export interface ConfirmableRowConfig extends EntityConfig {
