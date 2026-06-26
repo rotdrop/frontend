@@ -24,6 +24,7 @@ declare global {
 
 export interface ActionConfigParams {
   entity?: string;
+  hours_to_show?: number;
   camera_image?: string;
   image_entity?: string;
   hold_action?: ActionConfig;
@@ -113,7 +114,10 @@ export const handleAction = async (
         config.camera_image ||
         config.image_entity;
       if (entityId) {
-        fireEvent(node, "hass-more-info", { entityId });
+        fireEvent(node, "hass-more-info", {
+          entityId,
+          hoursToShow: config.hours_to_show ? config.hours_to_show : 24,
+        });
       } else {
         showToast(node, {
           message: hass.localize(
