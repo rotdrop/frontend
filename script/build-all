@@ -13,6 +13,8 @@ pip install --upgrade pip
 pip install build
 nvm use
 yarn install
+export PNPM_HOME=$(realpath ..)/pnpm
+pnpm install
 node_modules/.bin/gulp setup-and-fetch-nightly-translations
 node_modules/.bin/gulp build-app
 
